@@ -1,0 +1,51 @@
+html {
+    background-color: #DDD8FF;
+}
+
+nav {
+    background-color:DarkSlateBlue;
+}
+
+nav a {
+    color:white;
+    margin-left: 50px;
+}
+
+p {
+    margin-bottom: 0px !important;
+}
+
+.contenido {
+    background-color: white;
+    border-radius: 5px;
+    margin: 20px 0px;
+    padding: 25px !important;
+}
+
+.new-product {
+    float: right;
+    margin-bottom:15px;
+}
+
+.edit-product {
+    margin-left: 10px;
+}
+
+.thead {
+    display: flex;
+    align-items:center;
+    font-weight: bold;
+}
+
+.hiddenBox {
+    display: none;
+}
+
+.discountBtn {
+    background-image: url("discount.png");
+    background-size: contain;
+    width: 25px;
+    height: 25px;
+    border:none;
+    margin-left: 10px;
+}
