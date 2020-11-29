@@ -102,24 +102,38 @@ $("#save-order").on('click', function() {
 
 });
 
-function selectItem(item){
-    console.log(item);
-    selectedItem = item.closest('.row');
-    console.log(selectedItem.html);
-}
 
 var discountModal = $('#discountModal');
-    // New product modal (close)
-    discountModal.on('hide.bs.modal', function(){
+    discountModal.on('show.bs.modal', function(){
         $("#discount").val('0');
         $("#newPrice").val('0.00');
         discountModal.find('.modal-title').text('Discount - ');
     });
 
-    // New product modal (open) - populate dropdown
-    discountModal.on('shown.bs.modal',function(){
-        console.log("shown");
-        //console.log(selectedItem.find('.cart-product').val());
-        //discountModal.find('.modal-title').text('Discount - ' + selectedItem.find('.cart-product').val());
-        //$("#newPrice").val(selectedItem.find('.product-total').val());
+    $(document).on('click', '.discountBtn' , function(){
+        $(this).closest('.row').find('.product-total').addClass("selecteditem");
+
+        var pname = $(this).closest('.row').find('option:selected').text();
+        discountModal.find('.modal-title').text('Discount - ' + pname);
+
+        discountprice = $(this).closest('.row').find('.product-total').val();
+        $('#newPrice').val(discountprice);
+    });
+
+    $(document).on('change', '#discount' , function(){
+        var percent = $(this).val() / 100;
+        newprice = (discountprice * (1 - percent))
+        $('#newPrice').val(newprice.toFixed(2));
+    });
+
+    $('#savediscount').on('click', function(){
+        $('.selecteditem').val( parseFloat($('#newPrice').val()).toFixed(2) );
+        discountModal.modal('hide');
+        calculateTotal();
+    });
+
+    discountModal.on('hide.bs.modal', function(){
+        $('.selecteditem').removeClass("selecteditem");
+        discountprice = 0;
+        newprice = 0;
     });

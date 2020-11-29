@@ -8,7 +8,6 @@ nav {
 
 nav a {
     color:white;
-    margin-left: 50px;
 }
 
 p {
@@ -48,4 +47,9 @@ p {
     height: 25px;
     border:none;
     margin-left: 10px;
+}
+
+.active {
+    font-weight: bold;
+    text-decoration: underline;
 }

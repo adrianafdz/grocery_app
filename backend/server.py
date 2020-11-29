@@ -79,6 +79,23 @@ def insert_order():
     return response
 
 
+@app.route('/getOrders', methods=['GET'])
+def get_orders():
+    orders = order_dao.get_all_orders(connection)
+    response = jsonify(orders)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+@app.route('/getDetails', methods=['GET'])
+def get_details():
+    id = request.args.get('oid')
+    details = order_dao.get_order_details(connection, id)
+    response = jsonify(details)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
 if __name__ == '__main__':
     print("Starting Python Falsk Server for Grocery Store Mgmt System")
     app.run(port=5000)

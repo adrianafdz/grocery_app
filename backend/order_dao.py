@@ -35,8 +35,48 @@ def insert_order (connection, order):
     return order_id
 
 
+def get_all_orders(connection):
+    cursor = connection.cursor()
+    query = ("SELECT * FROM grocery_store.orders")
+    cursor.execute(query)
+
+    response = []
+    for (idorders, customer_name, total, date) in cursor:
+        response.append({
+            'idorders': idorders,
+            'customer_name': customer_name,
+            'total': total,
+            'date': date
+        })
+
+    return response
+
+
+def get_order_details(connection, orderid):
+    cursor = connection.cursor()
+    query = ('''SELECT d.idproducts, p.name, p.price_per_unit, d.quantity, d.total_price 
+            FROM grocery_store.order_details d, grocery_store.products p
+            WHERE d.idproducts = p.idproducts AND
+            idorder=''' + str(orderid))
+    cursor.execute(query)
+
+    response = []
+
+    for (idproducts, name, price_per_unit, quantity, total_price) in cursor:
+        response.append({
+            'idproducts': idproducts,
+            'name': name,
+            'price_per_unit': price_per_unit,
+            'quantity': quantity,
+            'total_price': total_price
+        })
+
+    return response
+
+
 if __name__ == '__main__':
     connection = get_sql_connection()
+    print(get_order_details(connection, 3))
 
     # insert_order(connection, {
     #     'customer_name': 'Adri',

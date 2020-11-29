@@ -12,7 +12,7 @@ var editModal = $('#editModal');
                     '" data-unit="' + product.idunit + '" data-price="' + product.price_per_unit + '">' +
                     '<td>' + product.name + '</td>' +
                     '<td>' + product.unit_name + '</td>' +
-                    '<td>' + product.price_per_unit + '</td>' +
+                    '<td>' + product.price_per_unit.toFixed(2) + '</td>' +
                     '<td><span class="btn btn-xs btn-danger delete-product">Delete</span>' +
                     '<button type="button" class="btn btn-xs btn-warning edit-product" data-toggle="modal" data-target="#editModal">Edit</button><td></tr>';
                 });
